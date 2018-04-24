@@ -1,0 +1,37 @@
+version: '3'
+
+networks:
+  chessboard-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.74.0.0/24
+
+services:
+  # container usage:
+  #  docker-compose run cli vendor/bin/phpunit
+  php-cli:
+    build: docker/php-cli
+    working_dir: /var/www/
+    ports:
+      - 9091:9091
+    networks:
+      chessboard-network:
+        aliases:
+          - cli
+    volumes:
+      - .:/var/www
+
+  # container usage:
+  #  docker-compose run composer [command]
+  composer:
+    build: docker/composer
+    working_dir: /var/www/
+    networks:
+      chessboard-network:
+        aliases:
+          - composer
+    volumes:
+      - .:/var/www
+    command: -q
