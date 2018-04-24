@@ -1,0 +1,13 @@
+<phpunit colors="true" verbose="true" backupGlobals="false">
+    <testsuite name="Tests">
+        <directory suffix=".php">./tests</directory>
+    </testsuite>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./</directory>
+            <exclude>
+                <directory>./tests</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
